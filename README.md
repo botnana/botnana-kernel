@@ -27,11 +27,11 @@ The ***.config*** file will be generated.
 
 # Build kernel image, modules, device tree:
 
-    make ARCH=arm CROSS_COMPILE=${CC} -j4 LOADADDR=0x80008000 uImage dtbs modules   
+    make ARCH=arm CROSS_COMPILE=${CC} -j4 LOADADDR=0x80008000 zImage dtbs modules   
 
 # Install kernel image:
 
-    sudo cp -v ./arch/arm/boot/zImage /media/rootfs/boot/vmlinuz-3.14.17   
+    sudo cp -v ./arch/arm/boot/zImage /media/rootfs/boot/zImage   
 
 # Install modules
 
@@ -39,22 +39,20 @@ The ***.config*** file will be generated.
     make -s ARCH=arm CROSS_COMPILE="${CC}" modules_install INSTALL_MOD_PATH=/tmp/deploy
 
     cd /tmp/deploy
-    tar --create --gzip --file 3.14.17-modules.tar.gz *
-    sudo tar vxzf 3.14.17-modules.tar.gz -C /media/rootfs/
+    tar --create --gzip --file 3.14.26-modules.tar.gz *
+    sudo tar vxzf 3.14.26-modules.tar.gz -C /media/rootfs/
 
     cd ..
     rm -rf /tmp/deploy   
 
 # Install Firmware
 
-**Note: this step seems not necessary for BotBone.**
-
     mkdir -p /tmp/deploy
     make -s ARCH=arm CROSS_COMPILE="${CC}" firmware_install INSTALL_FW_PATH=/tmp/deploy
 
     cd /tmp/deploy
-    tar --create --gzip --file 3.14.17-firmware.tar.gz *
-    sudo tar vxzf 3.14.17-firmware.tar.gz -C /media/rootfs/lib/firmware
+    tar --create --gzip --file 3.14.26-firmware.tar.gz *
+    sudo tar vxzf 3.14.26-firmware.tar.gz -C /media/rootfs/lib/firmware
 
     cd ..
     rm -rf /tmp/deploy   
